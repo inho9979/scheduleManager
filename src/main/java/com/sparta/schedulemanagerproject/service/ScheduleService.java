@@ -54,6 +54,15 @@ public class ScheduleService {
         return new ScheduleResponseDto(schedule);
     }
 
+    public String deleteSchedule(long id, long password) {
+        Schedule schedule = findSchedule(id);
+        if(schedule.getPassword() != password){
+            return "비밀번호가 틀립니다";
+        }
+        scheduleRepository.delete(schedule);
+        return "삭제가 완료됐습니다";
+    }
+
 
 
     public Schedule findSchedule(long id) {
