@@ -29,4 +29,18 @@ public class ScheduleService {
 
         return scheduleResponseDto;
     }
+
+    public ScheduleResponseDto getSchedule(long id) {
+
+        Schedule schedule = findSchedule(id);
+        return new ScheduleResponseDto(schedule);
+    }
+
+
+
+    public Schedule findSchedule(long id) {
+        return scheduleRepository.findById(id).orElseThrow( () ->
+                new IllegalArgumentException("일정이 존재하지 않습니다")
+        );
+    }
 }
