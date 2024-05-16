@@ -2,7 +2,6 @@ package com.sparta.schedulemanagerproject.controller;
 
 import com.sparta.schedulemanagerproject.dto.ScheduleRequestDto;
 import com.sparta.schedulemanagerproject.dto.ScheduleResponseDto;
-import com.sparta.schedulemanagerproject.entity.Schedule;
 import com.sparta.schedulemanagerproject.service.ScheduleService;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,5 +34,9 @@ public class ScheduleController {
         return scheduleService.getSchedules();
     }
 
+    @PutMapping("/update/id/{id}")
+    public ScheduleResponseDto updateSchedule(@PathVariable("id") long id, @RequestBody ScheduleRequestDto scheduleRequestDto) {
+        return scheduleService.updateSchedule(id, scheduleRequestDto);
+    }
 }
 

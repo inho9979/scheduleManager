@@ -33,4 +33,11 @@ public class Schedule extends Timestamped {
         this.manager = scheduleRequestDto.getManager();
         this.password = scheduleRequestDto.getPassword();
     }
+
+    public void update(ScheduleRequestDto scheduleRequestDto)
+    {
+        this.title = scheduleRequestDto.getTitle();
+        this.contents = scheduleRequestDto.getContents();
+        this.manager = scheduleRequestDto.getManager();
+    }
 }

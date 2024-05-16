@@ -26,7 +26,6 @@ public class TestSchedule {
         schedule.setTitle("제목");
         schedule.setManager("매니저");
         schedule.setPassword(12345);
-        schedule.setWriteDate("작성일");
 
         em.persist(schedule);
     }

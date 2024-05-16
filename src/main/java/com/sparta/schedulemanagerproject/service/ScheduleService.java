@@ -41,6 +41,20 @@ public class ScheduleService {
         return scheduleRepository.findAll().stream().map(ScheduleResponseDto::new).sorted(Comparator.comparing(ScheduleResponseDto::getCreateAt).reversed()).toList();
     }
 
+    @Transactional
+    public ScheduleResponseDto updateSchedule(long id, ScheduleRequestDto scheduleRequestDto) {
+        Schedule schedule =  findSchedule(id);
+        if(schedule.getPassword() != scheduleRequestDto.getPassword()) {
+            throw new IllegalArgumentException("비밀번호가 틀립니다");
+        }
+
+        schedule.update(scheduleRequestDto);
+
+
+        return new ScheduleResponseDto(schedule);
+    }
+
+
 
     public Schedule findSchedule(long id) {
         return scheduleRepository.findById(id).orElseThrow( () ->
