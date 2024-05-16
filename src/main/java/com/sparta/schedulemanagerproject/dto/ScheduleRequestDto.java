@@ -13,7 +13,6 @@ public class ScheduleRequestDto {
     private String contents;
     private String manager;
     private long password;
-    private String writeDate;
 
 
     public ScheduleRequestDto(String title, String contents, String manager, long password, String writeDate) {
@@ -21,6 +20,5 @@ public class ScheduleRequestDto {
         this.contents = contents;
         this.manager = manager;
         this.password = password;
-        this.writeDate = writeDate;
     }
 }

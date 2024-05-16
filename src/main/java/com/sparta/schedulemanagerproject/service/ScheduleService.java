@@ -8,6 +8,7 @@ import com.sparta.schedulemanagerproject.repository.ScheduleRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,6 +37,9 @@ public class ScheduleService {
         return new ScheduleResponseDto(schedule);
     }
 
+    public List<ScheduleResponseDto> getSchedules(){
+        return scheduleRepository.findAll().stream().map(ScheduleResponseDto::new).sorted(Comparator.comparing(ScheduleResponseDto::getCreateAt).reversed()).toList();
+    }
 
 
     public Schedule findSchedule(long id) {

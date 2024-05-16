@@ -7,11 +7,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
-public class Schedule {
+public class Schedule extends Timestamped {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -24,15 +26,11 @@ public class Schedule {
     private String manager;
     @Column(name = "password")
     private long password;
-    @Column(name = "writeDate")
-    private String writeDate;
-
 
     public Schedule(ScheduleRequestDto scheduleRequestDto) {
         this.contents = scheduleRequestDto.getContents();
         this.title = scheduleRequestDto.getTitle();
         this.manager = scheduleRequestDto.getManager();
         this.password = scheduleRequestDto.getPassword();
-        this.writeDate = scheduleRequestDto.getWriteDate();
     }
 }

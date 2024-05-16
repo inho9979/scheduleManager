@@ -4,6 +4,9 @@ package com.sparta.schedulemanagerproject.dto;
 import com.sparta.schedulemanagerproject.entity.Schedule;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.cglib.core.Local;
+
+import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor
@@ -15,7 +18,7 @@ public class ScheduleResponseDto {
     private String contents;
     private String manager;
     private long password;
-    private String writeDate;
+    private LocalDateTime createAt;
 
     public ScheduleResponseDto(Schedule saveSchedule) {
         this.id = saveSchedule.getId();
@@ -23,6 +26,6 @@ public class ScheduleResponseDto {
         this.contents = saveSchedule.getContents();
         this.manager = saveSchedule.getManager();
         this.password = saveSchedule.getPassword();
-        this.writeDate = saveSchedule.getWriteDate();
+        this.createAt = saveSchedule.getCreatedAt();
     }
 }
