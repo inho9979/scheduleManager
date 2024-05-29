@@ -23,6 +23,30 @@ public class CommentController {
     @PostMapping("/write")
     public CommentResponseDto createComment(@RequestBody @Valid CommentRequestDto requestDto, BindingResult bindingResult) {
 
+//        List<FieldError> fieldErrors = bindingResult.getFieldErrors();
+//        if(fieldErrors.size() > 0) {
+//            for(FieldError fieldError : bindingResult.getFieldErrors()) {
+//                log.error(fieldError.getField() + " 필드 : " + fieldError.getDefaultMessage());
+//            }
+//            throw new IllegalArgumentException();
+//        }
+        checkError(bindingResult);
+        return commentService.createComment(requestDto);
+    }
+
+    @PutMapping("/update")
+    public CommentResponseDto updateComment(long commentId, @RequestBody @Valid CommentRequestDto requestDto, BindingResult bindingResult)
+    {
+        if(commentId < 1) {
+            throw new IllegalArgumentException();
+        }
+        checkError(bindingResult);
+        return commentService.updateComment(commentId, requestDto);
+    }
+
+
+
+    private void checkError(BindingResult bindingResult) {
         List<FieldError> fieldErrors = bindingResult.getFieldErrors();
         if(fieldErrors.size() > 0) {
             for(FieldError fieldError : bindingResult.getFieldErrors()) {
@@ -30,6 +54,5 @@ public class CommentController {
             }
             throw new IllegalArgumentException();
         }
-        return commentService.createComment(requestDto);
     }
 }
