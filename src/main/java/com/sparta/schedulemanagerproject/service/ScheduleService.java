@@ -8,9 +8,7 @@ import com.sparta.schedulemanagerproject.repository.ScheduleRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ScheduleService {
@@ -38,13 +36,15 @@ public class ScheduleService {
     }
 
     public List<ScheduleResponseDto> getSchedules(){
-        return scheduleRepository.findAll().stream().map(ScheduleResponseDto::new).sorted(Comparator.comparing(ScheduleResponseDto::getCreateAt).reversed()).toList();
+
+        //scheduleRepository.findAll().stream().map(ScheduleResponseDto::new).sorted(Comparator.comparing(ScheduleResponseDto::getCreateAt).reversed()).toList();
+        return scheduleRepository.findAllByOrderByCreatedAtDesc().stream().map(ScheduleResponseDto::new).toList();
     }
 
     @Transactional
-    public ScheduleResponseDto updateSchedule(long id, ScheduleRequestDto scheduleRequestDto) {
-        Schedule schedule =  findSchedule(id);
-        if(schedule.getPassword() != scheduleRequestDto.getPassword()) {
+    public ScheduleResponseDto updateSchedule(long schedule_id, ScheduleRequestDto scheduleRequestDto) {
+        Schedule schedule =  findSchedule(schedule_id);
+        if(!schedule.getPassword().equals(scheduleRequestDto.getPassword())) {
             throw new IllegalArgumentException("비밀번호가 틀립니다");
         }
 
@@ -54,9 +54,9 @@ public class ScheduleService {
         return new ScheduleResponseDto(schedule);
     }
 
-    public String deleteSchedule(long id, long password) {
+    public String deleteSchedule(long id, String password) {
         Schedule schedule = findSchedule(id);
-        if(schedule.getPassword() != password){
+        if(!schedule.getPassword().equals(password)){
             return "비밀번호가 틀립니다";
         }
         scheduleRepository.delete(schedule);
@@ -67,7 +67,7 @@ public class ScheduleService {
 
     public Schedule findSchedule(long id) {
         return scheduleRepository.findById(id).orElseThrow( () ->
-                new IllegalArgumentException("일정이 존재하지 않습니다")
+                new IllegalArgumentException("찾을 수 없습니다")
         );
     }
 }

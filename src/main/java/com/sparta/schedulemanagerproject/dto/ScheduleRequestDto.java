@@ -7,18 +7,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ScheduleRequestDto {
 
-    private long id;
-
     private String title;
     private String contents;
     private String manager;
-    private long password;
-
-
-    public ScheduleRequestDto(String title, String contents, String manager, long password, String writeDate) {
-        this.title = title;
-        this.contents = contents;
-        this.manager = manager;
-        this.password = password;
-    }
+    private String password;
 }

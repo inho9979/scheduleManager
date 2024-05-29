@@ -4,16 +4,12 @@ import com.sparta.schedulemanagerproject.dto.ScheduleRequestDto;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.time.LocalDateTime;
 
 @Entity
 @Getter
-@Setter
 @NoArgsConstructor
 public class Schedule extends Timestamped {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -25,7 +21,7 @@ public class Schedule extends Timestamped {
     @Column(name = "manager")
     private String manager;
     @Column(name = "password")
-    private long password;
+    private String password;
 
     public Schedule(ScheduleRequestDto scheduleRequestDto) {
         this.contents = scheduleRequestDto.getContents();
