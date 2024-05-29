@@ -1,5 +1,6 @@
 package com.sparta.schedulemanagerproject.entity;
 
+import com.sparta.schedulemanagerproject.dto.CommentRequestDto;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,7 +15,7 @@ public class Comment extends Timestamped {
     private long id;
 
     @Column
-    private String commnets;
+    private String comments;
     @Column
     private String username;
 
@@ -22,4 +23,10 @@ public class Comment extends Timestamped {
     @JoinColumn(name = "schedule_id")
     private  Schedule schedule;
 
+    public Comment(CommentRequestDto requestDto, Schedule schedule) {
+        this.comments = requestDto.getComments();
+        this.username = requestDto.getUsername();
+
+        this.schedule = schedule;
+    }
 }

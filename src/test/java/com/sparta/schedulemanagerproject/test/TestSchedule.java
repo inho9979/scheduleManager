@@ -22,9 +22,9 @@ public class TestSchedule {
     @DisplayName("생성 성공")
     void test1() {
         Schedule schedule = new Schedule();
-        schedule.setContents("생성 테스트");
-        schedule.setTitle("제목");
-        schedule.setManager("매니저");
+//        schedule.setContents("생성 테스트");
+//        schedule.setTitle("제목");
+//        schedule.setManager("매니저");
         //schedule.setPassword(12345);
 
         em.persist(schedule);

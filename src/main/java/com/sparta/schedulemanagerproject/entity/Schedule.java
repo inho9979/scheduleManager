@@ -5,6 +5,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Getter
 @NoArgsConstructor
@@ -22,6 +25,9 @@ public class Schedule extends Timestamped {
     private String manager;
     @Column(name = "password")
     private String password;
+
+//    @OneToMany(mappedBy = "schedule")
+//    private List<Comment> commentList = new ArrayList<>();
 
     public Schedule(ScheduleRequestDto scheduleRequestDto) {
         this.contents = scheduleRequestDto.getContents();
