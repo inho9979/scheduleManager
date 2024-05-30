@@ -6,6 +6,7 @@ import com.sparta.schedulemanagerproject.service.CommentService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
@@ -42,6 +43,13 @@ public class CommentController {
         }
         checkError(bindingResult);
         return commentService.updateComment(commentId, requestDto);
+    }
+
+    @DeleteMapping
+    public String deleteComment(long commentId, @RequestBody CommentRequestDto requestDto) {
+        commentService.deleteComment(commentId, requestDto);
+        ResponseEntity.status(201);
+        return "성공했습니다";
     }
 
 
